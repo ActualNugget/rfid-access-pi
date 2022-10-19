@@ -1,0 +1,1 @@
+# Logs the access in a document
