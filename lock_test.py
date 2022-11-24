@@ -10,6 +10,6 @@ GPIO.setup(lock_pin, GPIO.OUT)
 
 while True:
     GPIO.output(lock_pin,1)
-    sleep(3)
+    time.sleep(3)
     GPIO.output(lock_pin,0)
-    sleep(5)
+    time.sleep(5)
