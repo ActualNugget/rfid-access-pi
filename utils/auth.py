@@ -3,3 +3,7 @@
 class Auth:
     def check_auth(rfid, authdf):
         return rfid in authdf.loc[:,'RFID'].tolist()
+
+    def create(rfid, userName, authSheet):
+        row = authSheet.find(userName).row
+        authSheet.update('B{0}'.format(row), rfid)

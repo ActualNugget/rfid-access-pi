@@ -16,5 +16,18 @@ def access(rfid):
     
 logdf = access('04 71 90 22 98 58 80')
 
+def updateAuthSheet(rfid):
+    userName = input('Enter name: ')
+    userList = authSheet.findall(userName)
+    if len(userList) == 0:
+        print ('User <{0}> not found'.format(userName))
+    elif len(userList) > 1:
+        print(userList)
+        print('Resolve repeated names in the Google Sheet')
+    else:
+        Auth.create(rfid, userName, authSheet)
+
+updateAuthSheet('04 71 90 22 98 58 80')
+
 # rfid_access_log = Store.read()
 # print(rfid_access_log)
