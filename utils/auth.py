@@ -1,6 +1,9 @@
-# Code for the authentication of the RFID UID
+# Check if the RFID is in the Authorised Users Sheet
 
 class Auth:
-    def check_auth(uid, log):
-        #uid will be the id that is scanned, log is the data which contains all the RFID ids that are tracked in the excel
-        return None # Return true if the uid is present in the excel data, else return false
+    def check_auth(rfid, authdf):
+        return rfid in authdf.loc[:,'RFID'].tolist()
+
+    def create(rfid, userName, authSheet):
+        row = authSheet.find(userName).row
+        authSheet.update('B{0}'.format(row), rfid)
