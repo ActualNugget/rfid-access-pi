@@ -11,7 +11,7 @@ reader = SimpleMFRC522()
 
 def scan():
     id, text = reader.read()
-    print(id)
+    # print(id)
     # print(text)
     GPIO.cleanup()
     return id

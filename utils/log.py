@@ -5,9 +5,9 @@ import time
 class Log:
     def create(rfid, authdf, logdf):
         currentTime = time.asctime()
-        if rfid in authdf.loc[:,'RFID'].tolist():
+        if rfid in authdf.loc[:,'Decimal'].tolist():
             authorised = True
-            entry = authdf.loc[authdf['RFID'] == rfid]
+            entry = authdf.loc[authdf['Decimal'] == rfid]
             user = entry.loc[:,'Name'].tolist()[0]
         else:
             authorised = False

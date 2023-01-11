@@ -6,6 +6,7 @@ from utils.auth import Auth
 from utils.log import Log
 from pi.scan import scan
 from pi.lock import open
+import time
 
 authdf = pd.DataFrame(authSheet.get_all_records())
 logdf = pd.DataFrame(logSheet.get_all_records())
@@ -28,12 +29,11 @@ def updateAuthSheet(rfid):
     else:
         Auth.create(rfid, userName, authSheet)
 
-updateAuthSheet('04 71 90 22 98 58 80')
-
 # I am not using access() because I am too lazy to, should probably do that
 # TODO: push updated dfs to google sheets
 while True:
     rfid = scan()
     Log.create(rfid, authdf, logdf)
     if Auth.check_auth(rfid, authdf):
-        open(21)
+        open(40)
+    time.sleep(5)
