@@ -13,5 +13,6 @@ class Log:
             authorised = False
             user = ''
         df = pd.DataFrame([[currentTime, rfid, authorised, user]], columns=['Time', 'RFID', 'Authorised', 'User'])
+        print(df)
         logdf = pd.concat([logdf, df], ignore_index=True)
         return logdf
