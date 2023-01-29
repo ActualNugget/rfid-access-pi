@@ -12,11 +12,10 @@ authdf = pd.DataFrame(authSheet.get_all_records())
 logdf = pd.DataFrame(logSheet.get_all_records())
 
 def access(rfid):
-    Auth.check_auth(rfid, authdf)
+    if Auth.check_auth(rfid, authdf):
+        open(40)
     newLogdf = Log.create(rfid, authdf, logdf)
     set_with_dataframe(logSheet, newLogdf)
-    return newLogdf
-
 
 def updateAuthSheet(rfid):
     userName = input('Enter name: ')
@@ -29,11 +28,7 @@ def updateAuthSheet(rfid):
     else:
         Auth.create(rfid, userName, authSheet)
 
-# I am not using access() because I am too lazy to, should probably do that
-# TODO: push updated dfs to google sheets
 while True:
     rfid = scan()
-    Log.create(rfid, authdf, logdf)
-    if Auth.check_auth(rfid, authdf):
-        open(40)
+    access(rfid)
     time.sleep(5)
