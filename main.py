@@ -7,6 +7,7 @@ from utils.log import Log
 from pi.scan import scan
 from pi.lock import open
 import time
+import RPi.GPIO as GPIO
 
 authdf = pd.DataFrame(authSheet.get_all_records())
 logdf = pd.DataFrame(logSheet.get_all_records())
@@ -28,7 +29,10 @@ def updateAuthSheet(rfid):
     else:
         Auth.create(rfid, userName, authSheet)
 
-while True:
-    rfid = scan()
-    access(rfid)
-    time.sleep(5)
+try:
+    while True:
+        rfid = scan()
+        access(rfid)
+        time.sleep(5)
+finally:
+    GPIO.cleanup()
