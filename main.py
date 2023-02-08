@@ -5,7 +5,7 @@ import pandas as pd
 from utils.auth import Auth
 from utils.log import Log
 from pi.scan import scan
-from pi.lock import open
+from pi.lock import open, led
 import time
 import RPi.GPIO as GPIO
 
@@ -14,7 +14,9 @@ logdf = pd.DataFrame(logSheet.get_all_records())
 
 def access(rfid):
     if Auth.check_auth(rfid, authdf):
-        open(40)
+        open(16, 20)
+    else:
+        led(21)
     newLogdf = Log.create(rfid, authdf, logdf)
     set_with_dataframe(logSheet, newLogdf)
 
